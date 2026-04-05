@@ -25,7 +25,7 @@ The repository is intentionally lightweight:
 
 ## Repository Contents
 
-- `IBKR_xml_downloader.py`: main script and importable function
+- `src/IBKR_xml_downloader.py`: main script and importable function
 - `README.md`: project documentation
 
 ## Requirements
@@ -95,7 +95,7 @@ The script can be run directly from the terminal.
 ### Syntax
 
 ```bash
-python IBKR_xml_downloader.py TOKEN REPORT_NUMBER [FILENAME]
+python src/IBKR_xml_downloader.py TOKEN REPORT_NUMBER [FILENAME]
 ```
 
 ### Positional Arguments
@@ -117,24 +117,30 @@ statement.xml
 Use the default output file:
 
 ```bash
-python IBKR_xml_downloader.py YOUR_TOKEN YOUR_REPORT_NUMBER
+python src/IBKR_xml_downloader.py YOUR_TOKEN YOUR_REPORT_NUMBER
 ```
 
 Write to a custom file:
 
 ```bash
-python IBKR_xml_downloader.py YOUR_TOKEN YOUR_REPORT_NUMBER my_statement.xml
+python src/IBKR_xml_downloader.py YOUR_TOKEN YOUR_REPORT_NUMBER my_statement.xml
 ```
 
 If the file has execute permission, you can also run it directly:
 
 ```bash
-./IBKR_xml_downloader.py YOUR_TOKEN YOUR_REPORT_NUMBER
+./src/IBKR_xml_downloader.py YOUR_TOKEN YOUR_REPORT_NUMBER
 ```
 
 ## Python Usage
 
-The script also exposes a function you can import:
+The script also exposes a function you can import from the repository root:
+
+```bash
+PYTHONPATH=src python -c "from IBKR_xml_downloader import download_xml; download_xml('YOUR_TOKEN', 'YOUR_REPORT_NUMBER')"
+```
+
+Or from Python after adding `src/` to `PYTHONPATH`:
 
 ```python
 from IBKR_xml_downloader import download_xml
@@ -183,7 +189,7 @@ That means the polling waits are:
 - 55 seconds
 - 65 seconds
 
-These values are currently hard-coded in `IBKR_xml_downloader.py`.
+These values are currently hard-coded in `src/IBKR_xml_downloader.py`.
 
 ## Error Handling
 
@@ -221,7 +227,7 @@ There is no formal test suite in this repository.
 The main validation command is:
 
 ```bash
-python -m py_compile IBKR_xml_downloader.py
+python -m py_compile src/IBKR_xml_downloader.py
 ```
 
 ## Development Notes
